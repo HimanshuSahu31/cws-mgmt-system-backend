@@ -28,14 +28,14 @@ public class Office {
 	private Long id;
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity=OfficeType.class)
-	@JoinColumn(name=SpringConstants.OFFICE_TYPE)
+	@JoinColumn(name=SpringConstants.OFFICE_TYPE, nullable=false)
 	private OfficeType officeType;
 	
 	@Column(name=SpringConstants.OFFICE_DESCRIPTION, length=300, nullable=false)
 	private String officeDescription;
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity=Address.class)
-	@JoinColumn(name=SpringConstants.OFFICE_ADDRESS)
+	@JoinColumn(name=SpringConstants.OFFICE_ADDRESS, nullable=false)
 	private Address officeAddress;
 	
 	@Column(name=SpringConstants.OFFICE_RATING, nullable=false)

@@ -1,5 +1,12 @@
 package com.cwsms.model.office.type;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.cwsms.constants.SpringConstants;
+
+@Entity
+@Table(name=SpringConstants.TABLE_CUBICLE)
 public class Cubicle extends OfficeType {
 	
 	public Cubicle() {

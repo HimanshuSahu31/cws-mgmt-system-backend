@@ -31,7 +31,7 @@ public class Payment {
 	private Float amount;
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity=Customer.class)
-	@JoinColumn(name=SpringConstants.PAYMENT_CUSTOMER)
+	@JoinColumn(name=SpringConstants.PAYMENT_CUSTOMER, nullable=false)
 	private Customer customer;
 	
 	public Payment(String details, Float amount, Customer customer) {

@@ -1,10 +1,37 @@
 package com.cwsms.model.issue;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import com.cwsms.constants.SpringConstants;
 import com.cwsms.model.issue.type.IssueType;
 
+@Entity
+@Table(name=SpringConstants.TABLE_OFFICE)
 public class Issue {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_ISSUE)
+	@SequenceGenerator(name=SpringConstants.GENERATOR_ISSUE, sequenceName=SpringConstants.SEQUENCE_ISSUE)
+	private Long id;
+	
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity=IssueType.class)
+	@JoinColumn(name=SpringConstants.ISSUE_TYPE, nullable=false)
 	private IssueType issueType;
+	
+	@Column(name=SpringConstants.ISSUE_DESCRIPTION, length=100, nullable=false)
 	private String description;
+	
+	@Column(name=SpringConstants.ISSUE_STATUS, length=15, nullable=false)
 	private String status;
 	
 	public Issue(IssueType issueType, String description, String status) {

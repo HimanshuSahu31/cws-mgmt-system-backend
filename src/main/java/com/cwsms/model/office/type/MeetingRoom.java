@@ -1,5 +1,12 @@
 package com.cwsms.model.office.type;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.cwsms.constants.SpringConstants;
+
+@Entity
+@Table(name=SpringConstants.TABLE_MEETING_ROOM)
 public class MeetingRoom extends OfficeType {
 	public MeetingRoom() {
 		super();
