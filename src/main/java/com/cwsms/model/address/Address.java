@@ -1,13 +1,39 @@
 package com.cwsms.model.address;
 
+import com.cwsms.constants.SpringConstants;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = SpringConstants.TABLE_ADDRESS)
 public class Address {
+	@Id
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator= SpringConstants.GENERATOR_ADDRESS)
+	@SequenceGenerator(name=SpringConstants.GENERATOR_ADDRESS, sequenceName=SpringConstants.SEQUENCE_ADDRESS)
+	private Long id;
+
+	@Column(name=SpringConstants.ADDRESS_LINE_ONE, length=300, nullable=false)
 	private String addressLineOne;
+
+	@Column(name=SpringConstants.ADDRESS_LINE_TWO, length=300, nullable=false)
 	private String addressLineTwo;
+
+	@Column(name=SpringConstants.ADDRESS_LINE_THREE, length=300, nullable=false)
 	private String addressLineThree;
+
+	@Column(name=SpringConstants.ADDRESS_PINCODE, length=10, nullable=false)
 	private String pincode;
+
+	@Column(name=SpringConstants.ADDRESS_AREA, length=100, nullable=false)
 	private String area;
+
+	@Column(name=SpringConstants.ADDRESS_CITY, length=100, nullable=false)
 	private String city;
+
+	@Column(name=SpringConstants.ADDRESS_STATE, length=100, nullable=false)
 	private String state;
+
+	@Column(name=SpringConstants.ADDRESS_COUNTRY, length=50, nullable=false)
 	private String country;
 	
 	public Address(String addressLineOne, String addressLineTwo, String addressLineThree, String pincode, String area,
