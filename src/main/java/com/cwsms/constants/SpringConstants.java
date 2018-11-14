@@ -81,4 +81,57 @@ public class SpringConstants {
 	
 	// Table Cubicle
 	public static final String TABLE_CUBICLE = "tb_cubicle";
+
+	// Table Address
+	public static final String TABLE_ADDRESS = "tb_address";
+	public static final String GENERATOR_ADDRESS = "adsress_sequence";
+	public static final String SEQUENCE_ADDRESS = "ADDRESS_SEQ";
+	public static final String ADDRESS_LINE_ONE = "address_line_one";
+	public static final String ADDRESS_LINE_TWO= "address_line_two";
+	public static final String ADDRESS_LINE_THREE = "address_line_three";
+	public static final String ADDRESS_PINCODE = "address_pincode";
+	public static final String ADDRESS_AREA = "address_area";
+	public static final String ADDRESS_CITY = "address_city";
+	public static final String ADDRESS_STATE = "address_state";
+	public static final String ADDRESS_COUNTRY = "address_country";
+
+	// Table User
+	public static final String TABLE_USER = "tb_user";
+	public static final String GENERATOR_USER = "user_sequence";
+	public static final String SEQUENCE_USER = "USER_SEQ";
+	public static final String USER_FIRST_NAME = "user_fname";
+	public static final String USER_MIDDLE_NAME = "user_mname";
+	public static final String USER_LAST_NAME = "user_lname";
+	public static final String USER_ADDRESS = "user_address";
+	public static final String USER_DATE_OF_BIRTH = "user_dob";
+	public static final String USER_DATE_FORMAT = "dd/MM/yyyy";
+	public static final String USER_EMAIL = "user_email";
+	public static final String USER_PHONE_NUMBER = "user_phone";
+	public static final String USER_ID_PROOF = "user_id_proof";
+	public static final String USER_STATUS = "user_status";
+
+	//Table Rights
+	public static final String TABLE_RIGHTS = "tb_rights";
+	public static final String GENERATOR_RIGHTS = "rights_sequence";
+	public static final String SEQUENCE_RIGHTS = "RIGHTS_SEQ";
+	public static final String RIGHTS_CAN_READ = "rights_can_read";
+	public static final String RIGHTS_CAN_WRITE = "rights_can_write";
+	public static final String RIGHTS_CAN_DELETE = "rights_can_delete";
+	public static final String RIGHTS_CAN_UPDATE = "rights_can_update";
+	public static final String RIGHTS_CAN_CREATE = "rights_can_create";
+	public static final String RIGHTS_CAN_GRANT = "rights_can_grant";
+	public static final String RIGHTS_CAN_REVOKE = "rights_can_revoke";
+
+	// Table Admin
+	public static final String TABLE_ADMIN = "tb_admin";
+	public static final String GENERATOR_ADMIN = "admin_sequence";
+	public static final String SEQUENCE_ADMIN= "ADMIN_SEQ";
+	public static final String ADMIN_RIGHTS = "admin_rights";
+	public static final String ADMIN_ISSUES = "admin_issues";
+
+	// Table Receptionist
+	public static final String TABLE_RECEPTIONIST = "tb_receptionist";
+	public static final String GENERATOR_RECEPTIONIST = "receptionist_sequence";
+	public static final String SEQUENCE_RECEPTIONIST= "RECEPTIONIST_SEQ";
+	public static final String RECEPTIONIST_WORKSPACE_ASSIGNED = "receptionist_workspace";
 }
