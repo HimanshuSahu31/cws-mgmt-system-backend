@@ -40,6 +40,12 @@ public class Booking {
 	@JoinColumn(name=SpringConstants.BOOKING_ADMIN, nullable=false)
 	private Admin admin;
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	@Column(name=SpringConstants.BOOKING_DATE_OF_BOOKING, length=20, nullable=false)
 	@DateTimeFormat(pattern=SpringConstants.BOOKING_DATE_FORMAT)
 	private Date dateOfBooking;
@@ -56,9 +62,10 @@ public class Booking {
 	@JoinColumn(name=SpringConstants.BOOKING_PAYMENT, nullable=false)
 	private Payment payment;
 	
-	public Booking(Customer customer, Admin admin, Date dateOfBooking, Workspace workspace, Office office,
+	public Booking(Long id, Customer customer, Admin admin, Date dateOfBooking, Workspace workspace, Office office,
 			Payment payment) {
 		super();
+		this.id = id;
 		this.customer = customer;
 		this.admin = admin;
 		this.dateOfBooking = dateOfBooking;
