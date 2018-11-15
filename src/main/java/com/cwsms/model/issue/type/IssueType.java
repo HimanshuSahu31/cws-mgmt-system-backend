@@ -45,4 +45,10 @@ public class IssueType {
 	public void setIssueTypePriority(String issueTypePriority) {
 		this.issueTypePriority = issueTypePriority;
 	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 }

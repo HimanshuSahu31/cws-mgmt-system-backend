@@ -47,7 +47,7 @@ public class BookingController {
 	@PostMapping(RESTConstants.BOOKINGS)
 	public ResponseEntity<Object> addNewBooking(@RequestBody Booking booking) {
 		Booking newBooking = bookingRepository.save(booking);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newBooking.getId()).toUri();
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path(RESTConstants.ID).buildAndExpand(newBooking.getId()).toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
