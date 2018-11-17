@@ -1,6 +1,9 @@
 package com.cwsms.model.user;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.cwsms.constants.SpringConstants;
 import com.cwsms.model.address.Address;
@@ -9,31 +12,40 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name=SpringConstants.USER_DISCRIMINATOR)
 @Table(name = SpringConstants.TABLE_USER)
-public abstract class User {
+public abstract class User implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1902095698133115692L;
+
 	@Id
 	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator= SpringConstants.GENERATOR_USER)
 	@SequenceGenerator(name=SpringConstants.GENERATOR_USER, sequenceName=SpringConstants.SEQUENCE_USER)
+	@Column(name=SpringConstants.USER_ID)
 	private Long id;
 
-	@Column(name=SpringConstants.USER_FIRST_NAME, length=300, nullable=false)
+	@Column(name=SpringConstants.USER_FIRST_NAME, length=20, nullable=false)
 	private String firstName;
 
-	@Column(name=SpringConstants.USER_MIDDLE_NAME, length=300, nullable=false)
+	@Column(name=SpringConstants.USER_MIDDLE_NAME, length=20, nullable=false)
 	private String middleName;
 
-	@Column(name=SpringConstants.USER_LAST_NAME, length=300, nullable=false)
+	@Column(name=SpringConstants.USER_LAST_NAME, length=20, nullable=false)
 	private String lastName;
 
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity=Address.class)
 	@JoinColumn(name=SpringConstants.USER_ADDRESS, nullable=false)
-	private Address address;
+	private Address userAddress;
 
 	@Column(name=SpringConstants.USER_DATE_OF_BIRTH, length=20, nullable=false)
 	@DateTimeFormat(pattern=SpringConstants.USER_DATE_FORMAT)
 	private Date dateOfBirth;
 
-	@Column(name=SpringConstants.USER_EMAIL, length=50, nullable=false)
+	@Column(name=SpringConstants.USER_EMAIL, length=300, nullable=false)
 	private String email;
 
 	@Column(name=SpringConstants.USER_PHONE_NUMBER, length=15, nullable=false)
@@ -41,6 +53,10 @@ public abstract class User {
 
 	@Column(name=SpringConstants.USER_ID_PROOF, length=50, nullable=false)
 	private String idProof;
+	
+	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.LAZY)
+	@JoinTable(name=SpringConstants.TB_USER_RIGHTS, joinColumns={@JoinColumn(name=SpringConstants.USER_ID)}, inverseJoinColumns={@JoinColumn(name=SpringConstants.RIGHTS_ID)})
+	private Set<Rights> userRights = new HashSet<>();
 
 	@Column(name=SpringConstants.USER_STATUS, nullable=false)
 	private Boolean status;
@@ -50,7 +66,7 @@ public abstract class User {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
-		this.address = address;
+		this.userAddress = address;
 		this.dateOfBirth = dateOfBirth;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
@@ -79,10 +95,10 @@ public abstract class User {
 		this.lastName = lastName;
 	}
 	public Address getAddress() {
-		return address;
+		return userAddress;
 	}
 	public void setAddress(Address address) {
-		this.address = address;
+		this.userAddress = address;
 	}
 	public Date getDateOfBirth() {
 		return dateOfBirth;
@@ -113,6 +129,22 @@ public abstract class User {
 	}
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Set<Rights> getRights() {
+		return userRights;
+	}
+
+	public void setRights(Set<Rights> rights) {
+		this.userRights = rights;
 	}
 	
 	

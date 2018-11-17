@@ -1,13 +1,16 @@
 package com.cwsms.model.office.type;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
@@ -16,6 +19,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 import com.cwsms.constants.SpringConstants;
+import com.cwsms.model.office.Office;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -26,6 +30,7 @@ public abstract class OfficeType {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_OFFICE_TYPE)
 	@SequenceGenerator(name=SpringConstants.GENERATOR_OFFICE_TYPE, sequenceName=SpringConstants.SEQUENCE_OFFICE_TYPE)
+	@Column(name=SpringConstants.OFFICETYPE_ID)
 	protected Long id;
 	
 	@Column(name=SpringConstants.OFFICETYPE_DESCRIPTION, length=300, nullable=false)
@@ -40,6 +45,9 @@ public abstract class OfficeType {
 	@DecimalMin(value=SpringConstants.OFFICETYPE_PRICE_MIN)
 	@DecimalMax(value=SpringConstants.OFFICETYPE_PRICE_MAX)
 	protected Float officeTypePrice;
+	
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.OFFICE_FK_TYPE)
+	protected Office office;
 	
 	public String getOfficeTypeDescription() {
 		return officeTypeDescription;

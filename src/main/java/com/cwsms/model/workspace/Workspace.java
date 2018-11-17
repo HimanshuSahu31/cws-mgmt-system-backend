@@ -32,12 +32,11 @@ public class Workspace {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_WORKSPACE)
 	@SequenceGenerator(name=SpringConstants.GENERATOR_WORKSPACE, sequenceName=SpringConstants.SEQUENCE_WORKSPACE)
+	@Column(name=SpringConstants.WORKSPACE_ID)
 	private Long id;
 	
 	@ManyToMany(fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name=SpringConstants.WORKSPACE_OFFICES, 
-	joinColumns= {@JoinColumn(name=SpringConstants.WORKSPACE_OFFICES_WORKSPACE)}, 
-	inverseJoinColumns= {@JoinColumn(name=SpringConstants.WORKSPACE_OFFICES_OFFICE)})
+	@JoinTable(name=SpringConstants.WORKSPACE_OFFICES, joinColumns={@JoinColumn(name=SpringConstants.WORKSPACE_ID)}, inverseJoinColumns={@JoinColumn(name=SpringConstants.OFFICE_ID)})
 	private Set<Office> offices = new HashSet<Office>();
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity=Receptionist.class)
@@ -59,9 +58,7 @@ public class Workspace {
 	private Integer capacity;
 	
 	@ManyToMany(fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name=SpringConstants.WORKSPACE_CUSTOMERS, 
-	joinColumns= {@JoinColumn(name=SpringConstants.WORKSPACE_OFFICES_WORKSPACE)}, 
-	inverseJoinColumns= {@JoinColumn(name=SpringConstants.WORKSPACE_OFFICES_CUSTOMER)})
+	@JoinTable(name=SpringConstants.WORKSPACE_CUSTOMERS, joinColumns={@JoinColumn(name=SpringConstants.WORKSPACE_ID)}, inverseJoinColumns={@JoinColumn(name=SpringConstants.CUSTOMER_ID)})
 	private Set<Customer> customers = new HashSet<Customer>();
 	
 	public Set<Office> getOffices() {

@@ -1,6 +1,8 @@
 package com.cwsms.model.address;
 
 import com.cwsms.constants.SpringConstants;
+import com.cwsms.model.office.Office;
+import com.cwsms.model.user.User;
 
 import javax.persistence.*;
 
@@ -10,6 +12,7 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator= SpringConstants.GENERATOR_ADDRESS)
 	@SequenceGenerator(name=SpringConstants.GENERATOR_ADDRESS, sequenceName=SpringConstants.SEQUENCE_ADDRESS)
+	@Column(name=SpringConstants.ADDRESS_ID)
 	private Long id;
 
 	@Column(name=SpringConstants.ADDRESS_LINE_ONE, length=300, nullable=false)
@@ -35,6 +38,12 @@ public class Address {
 
 	@Column(name=SpringConstants.ADDRESS_COUNTRY, length=50, nullable=false)
 	private String country;
+	
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.OFFICE_FK_ADDRESS)
+	private Office office;
+	
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.USER_FK_ADDRESS)
+	private User user;
 	
 	public Address(String addressLineOne, String addressLineTwo, String addressLineThree, String pincode, String area,
 			String city, String state, String country) {
@@ -100,4 +109,30 @@ public class Address {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Office getOffice() {
+		return office;
+	}
+
+	public void setOffice(Office office) {
+		this.office = office;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
 }

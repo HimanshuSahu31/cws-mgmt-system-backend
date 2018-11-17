@@ -20,6 +20,10 @@ public class SpringConstants {
 	public static final String WORKSPACE_CAPACITY = "capacity";
 	public static final String WORKSPACE_CUSTOMERS = "tb_workspace_customers";
 	public static final String WORKSPACE_OFFICES_CUSTOMER = "workspace_cust_id";
+	public static final String WORKSPACE_ID = "workspace_id";
+	public static final String WORKSPACE_FK_BOOKING = "workspace";
+	public static final String WORKSPACE_FK_CUSTOMERS = "customers";
+	public static final String WORKSPACE_FK_OFFICES = "offices";
 	
 	// Table Payment
 	public static final String TABLE_PAYMENT = "tb_payment";
@@ -28,6 +32,8 @@ public class SpringConstants {
 	public static final String PAYMENT_DETAILS = "payment_details";
 	public static final String PAYMENT_AMOUNT = "payment_amount";
 	public static final String PAYMENT_CUSTOMER = "payment_customer";
+	public static final String PAYMENT_ID = "payment_id";
+	public static final String PAYMENT_FK_BOOKING = "payment_booking_id";
 	
 	// Table Office
 	public static final String TABLE_OFFICE = "tb_office";
@@ -35,19 +41,24 @@ public class SpringConstants {
 	public static final String SEQUENCE_OFFICE = "OFFICE_SEQ";
 	public static final String OFFICE_TYPE = "office_type";
 	public static final String OFFICE_DESCRIPTION = "office_desc";
-	public static final String OFFICE_ADDRESS = "office_addr";
+	public static final String OFFICE_ADDRESS = "office_address";
 	public static final String OFFICE_RATING = "office_rating";
+	public static final String OFFICE_ID = "office_id";
+	public static final String OFFICE_FK_TYPE = "officeType";
+	public static final String OFFICE_FK_ADDRESS = "officeAddress";
+	public static final String OFFICE_FK_BOOKING = "office";
 	
 	// Table Office Type
 	public static final String TABLE_OFFICE_TYPE = "tb_office_type";
 	public static final String GENERATOR_OFFICE_TYPE = "office_type_sequence";
 	public static final String SEQUENCE_OFFICE_TYPE = "OFFICE_TYPE_SEQ";
 	public static final String OFFICETYPE_DISCRIMINATOR = "office_type_name";
-	public static final String OFFICETYPE_DESCRIPTION = "office_type_name";
-	public static final String OFFICETYPE_CAPACITY = "office_type_name";
-	public static final String OFFICETYPE_PRICE = "office_type_name";
+	public static final String OFFICETYPE_DESCRIPTION = "office_type_description";
+	public static final String OFFICETYPE_CAPACITY = "office_type_capacity";
+	public static final String OFFICETYPE_PRICE = "office_type_price";
 	public static final String OFFICETYPE_PRICE_MIN = "1000.0";
 	public static final String OFFICETYPE_PRICE_MAX = "15000.0";
+	public static final String OFFICETYPE_ID = "office_type_id";
 	
 	// Table Issue
 	public static final String TABLE_ISSUE = "tb_issue";
@@ -56,6 +67,9 @@ public class SpringConstants {
 	public static final String ISSUE_TYPE = "issue_type";
 	public static final String ISSUE_STATUS = "issue_status";
 	public static final String ISSUE_DESCRIPTION = "issue_desc";
+	public static final String ISSUE_ID = "issue_id";
+	public static final String ISSUE_FK = "issueType";
+	public static final String ISSUE_ADMIN_ID = "issue_admin";
 	
 	// Table Issue Type
 	public static final String TABLE_ISSUE_TYPE = "tb_issue_type";
@@ -63,6 +77,7 @@ public class SpringConstants {
 	public static final String SEQUENCE_ISSUE_TYPE = "ISSUE_TYPE_SEQ";
 	public static final String ISSUE_TYPE_NAME = "issue_type_name";
 	public static final String ISSUE_TYPE_PRIORITY = "issue_type_priority";
+	public static final String ISSUE_TYPE_ID = "issue_type_id";
 	
 	// Table Booking
 	public static final String TABLE_BOOKING = "tb_booking";
@@ -75,12 +90,18 @@ public class SpringConstants {
 	public static final String BOOKING_WORKSPACE = "booking_workspace";
 	public static final String BOOKING_OFFICE = "booking_office";
 	public static final String BOOKING_PAYMENT = "booking_payment";
+	public static final String BOOKING_ID = "booking_id";
+	public static final String BOOKING_FK_CUSTOMER = "customer";
+	public static final String BOOKING_FK_ADMIN = "admin";
+	public static final String BOOKING_FK_PAYMENT = "booking";
 	
 	// Table Meeting Room
 	public static final String TABLE_MEETING_ROOM = "tb_meeting_room";
+	public static final String MEETING_ROOM_ID = "meeting_room_id";
 	
 	// Table Cubicle
 	public static final String TABLE_CUBICLE = "tb_cubicle";
+	public static final String CUBICLE_ID = "cubicle_id";
 
 	// Table Address
 	public static final String TABLE_ADDRESS = "tb_address";
@@ -94,11 +115,13 @@ public class SpringConstants {
 	public static final String ADDRESS_CITY = "address_city";
 	public static final String ADDRESS_STATE = "address_state";
 	public static final String ADDRESS_COUNTRY = "address_country";
+	public static final String ADDRESS_ID = "address_id";
 
 	// Table User
 	public static final String TABLE_USER = "tb_user";
 	public static final String GENERATOR_USER = "user_sequence";
 	public static final String SEQUENCE_USER = "USER_SEQ";
+	public static final String USER_DISCRIMINATOR = "user_type";
 	public static final String USER_FIRST_NAME = "user_fname";
 	public static final String USER_MIDDLE_NAME = "user_mname";
 	public static final String USER_LAST_NAME = "user_lname";
@@ -109,6 +132,10 @@ public class SpringConstants {
 	public static final String USER_PHONE_NUMBER = "user_phone";
 	public static final String USER_ID_PROOF = "user_id_proof";
 	public static final String USER_STATUS = "user_status";
+	public static final String TB_USER_RIGHTS = "tb_user_rights";
+	public static final String USER_ID = "user_id";
+	public static final String USER_FK_RIGHTS = "userRights";
+	public static final String USER_FK_ADDRESS = "userAddress";
 
 	//Table Rights
 	public static final String TABLE_RIGHTS = "tb_rights";
@@ -121,17 +148,40 @@ public class SpringConstants {
 	public static final String RIGHTS_CAN_CREATE = "rights_can_create";
 	public static final String RIGHTS_CAN_GRANT = "rights_can_grant";
 	public static final String RIGHTS_CAN_REVOKE = "rights_can_revoke";
+	public static final String RIGHTS_ID = "rights_id";
+	public static final String RIGHTS_FK = "users";
 
 	// Table Admin
 	public static final String TABLE_ADMIN = "tb_admin";
 	public static final String GENERATOR_ADMIN = "admin_sequence";
 	public static final String SEQUENCE_ADMIN= "ADMIN_SEQ";
-	public static final String ADMIN_RIGHTS = "admin_rights";
 	public static final String ADMIN_ISSUES = "admin_issues";
+	public static final String ADMIN_ID = "admin_id";
+	public static final String ADMIN_FK_ISSUES = "issueAdmin";
 
 	// Table Receptionist
 	public static final String TABLE_RECEPTIONIST = "tb_receptionist";
 	public static final String GENERATOR_RECEPTIONIST = "receptionist_sequence";
 	public static final String SEQUENCE_RECEPTIONIST= "RECEPTIONIST_SEQ";
 	public static final String RECEPTIONIST_WORKSPACE_ASSIGNED = "receptionist_workspace";
+	public static final String RECEPTIONIST_ID = "receptionist_id";
+	
+	// Table Company
+	public static final String TABLE_COMPANY = "tb_company";
+	public static final String COMPANY_ID = "company_id";
+	public static final String GENERATOR_COMPANY = "company_sequence";
+	public static final String SEQUENCE_COMPANY = "COMPANY_SEQ";
+	
+	// Table Single User
+	public static final String TABLE_SINGLE_USER = "tb_single_user";
+	public static final String SINGLE_USER_ID = "single_user_id";
+	public static final String GENERATOR_SINGLE_USER = "single_user_sequence";
+	public static final String SEQUENCE_SINGLE_USER = "single_user_SEQ";
+	
+	// Table Customer
+	public static final String TABLE_CUSTOMER = "tb_customer";
+	public static final String CUSTOMER_DISCRIMINATOR = "customer_type";
+	public static final String GENERATOR_CUSTOMER = "customer_sequence";
+	public static final String SEQUENCE_CUSTOMER= "CUSTOMER_SEQ";
+	public static final String CUSTOMER_ID = "customer_id";
 }

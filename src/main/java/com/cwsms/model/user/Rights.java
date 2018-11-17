@@ -2,15 +2,25 @@ package com.cwsms.model.user;
 
 import com.cwsms.constants.SpringConstants;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = SpringConstants.TABLE_RIGHTS)
-public class Rights {
+public class Rights implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6216907676570262704L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_RIGHTS)
 	@SequenceGenerator(name=SpringConstants.GENERATOR_RIGHTS, sequenceName=SpringConstants.SEQUENCE_RIGHTS)
+	@Column(name=SpringConstants.RIGHTS_ID)
 	private Long id;
 
 	@Column(name=SpringConstants.RIGHTS_CAN_READ, nullable=false)
@@ -33,10 +43,14 @@ public class Rights {
 
 	@Column(name=SpringConstants.RIGHTS_CAN_REVOKE, nullable=false)
 	private Boolean canRevoke;
-
-	public Rights(Boolean canRead, Boolean canWrite, Boolean canDelete, Boolean canUpdate, Boolean canCreate,
+	
+	@ManyToMany(mappedBy=SpringConstants.USER_FK_RIGHTS, cascade= {CascadeType.PERSIST,CascadeType.MERGE}, fetch=FetchType.LAZY)
+	private Set<User> users = new HashSet<>();
+	
+	public Rights(Long id, Boolean canRead, Boolean canWrite, Boolean canDelete, Boolean canUpdate, Boolean canCreate,
 			Boolean canGrant, Boolean canRevoke) {
 		super();
+		this.id = id;
 		this.canRead = canRead;
 		this.canWrite = canWrite;
 		this.canDelete = canDelete;
@@ -89,5 +103,11 @@ public class Rights {
 	}
 	public void setCanRevoke(Boolean canRevoke) {
 		this.canRevoke = canRevoke;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

@@ -1,6 +1,8 @@
 package com.cwsms.model.booking;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -30,48 +33,39 @@ public class Booking {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_BOOKING)
 	@SequenceGenerator(name=SpringConstants.GENERATOR_BOOKING, sequenceName=SpringConstants.SEQUENCE_BOOKING)
+	@Column(name=SpringConstants.BOOKING_ID)
 	private Long id;
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, targetEntity=Customer.class)
-	@JoinColumn(name=SpringConstants.BOOKING_CUSTOMER, nullable=false)
+	@JoinColumn(name=SpringConstants.CUSTOMER_ID, nullable=false)
 	private Customer customer;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, targetEntity=Admin.class)
-	@JoinColumn(name=SpringConstants.BOOKING_ADMIN, nullable=false)
-	private Admin admin;
+	@Column(name=SpringConstants.BOOKING_DATE_OF_BOOKING, length=20, nullable=false)
+	@DateTimeFormat(pattern=SpringConstants.BOOKING_DATE_FORMAT)
+	private Date dateOfBooking;
+	
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, targetEntity=Office.class)
+	@JoinColumn(name=SpringConstants.OFFICE_ID, nullable=false)
+	private Office office;
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.BOOKING_FK_PAYMENT)
+	private Set<Payment> payment = new HashSet<>();
+	
+	public Booking(Long id, Customer customer, Admin admin, Date dateOfBooking, Workspace workspace, Office office,
+			Set<Payment> payment) {
+		super();
+		this.id = id;
+		this.customer = customer;
+		this.dateOfBooking = dateOfBooking;
+		this.office = office;
+		this.payment = payment;
+	}
 	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	@Column(name=SpringConstants.BOOKING_DATE_OF_BOOKING, length=20, nullable=false)
-	@DateTimeFormat(pattern=SpringConstants.BOOKING_DATE_FORMAT)
-	private Date dateOfBooking;
-	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, targetEntity=Workspace.class)
-	@JoinColumn(name=SpringConstants.BOOKING_WORKSPACE, nullable=false)
-	private Workspace workspace;
-	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, targetEntity=Office.class)
-	@JoinColumn(name=SpringConstants.BOOKING_OFFICE, nullable=false)
-	private Office office;
-	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, targetEntity=Payment.class)
-	@JoinColumn(name=SpringConstants.BOOKING_PAYMENT, nullable=false)
-	private Payment payment;
-	
-	public Booking(Long id, Customer customer, Admin admin, Date dateOfBooking, Workspace workspace, Office office,
-			Payment payment) {
-		super();
-		this.id = id;
-		this.customer = customer;
-		this.admin = admin;
-		this.dateOfBooking = dateOfBooking;
-		this.workspace = workspace;
-		this.office = office;
-		this.payment = payment;
 	}
 	public Booking() {
 		super();
@@ -82,23 +76,11 @@ public class Booking {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public Admin getAdmin() {
-		return admin;
-	}
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
 	public Date getDateOfBooking() {
 		return dateOfBooking;
 	}
 	public void setDateOfBooking(Date dateOfBooking) {
 		this.dateOfBooking = dateOfBooking;
-	}
-	public Workspace getWorkspace() {
-		return workspace;
-	}
-	public void setWorkspace(Workspace workspace) {
-		this.workspace = workspace;
 	}
 	public Office getOffice() {
 		return office;
@@ -106,10 +88,10 @@ public class Booking {
 	public void setOffice(Office office) {
 		this.office = office;
 	}
-	public Payment getPayment() {
+	public Set<Payment> getPayment() {
 		return payment;
 	}
-	public void setPayment(Payment payment) {
+	public void setPayment(Set<Payment> payment) {
 		this.payment = payment;
 	}
 	

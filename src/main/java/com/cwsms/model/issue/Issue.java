@@ -8,24 +8,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.cwsms.constants.SpringConstants;
 import com.cwsms.model.issue.type.IssueType;
+import com.cwsms.model.user.admin.Admin;
 
 @Entity
-@Table(name=SpringConstants.TABLE_OFFICE)
+@Table(name=SpringConstants.TABLE_ISSUE)
 public class Issue {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_ISSUE)
 	@SequenceGenerator(name=SpringConstants.GENERATOR_ISSUE, sequenceName=SpringConstants.SEQUENCE_ISSUE)
+	@Column(name=SpringConstants.ISSUE_ID)
 	private Long id;
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity=IssueType.class)
-	@JoinColumn(name=SpringConstants.ISSUE_TYPE, nullable=false)
+	@JoinColumn(name=SpringConstants.ISSUE_TYPE_ID, nullable=false)
 	private IssueType issueType;
 	
 	@Column(name=SpringConstants.ISSUE_DESCRIPTION, length=100, nullable=false)
@@ -33,6 +36,10 @@ public class Issue {
 	
 	@Column(name=SpringConstants.ISSUE_STATUS, length=15, nullable=false)
 	private String status;
+	
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, targetEntity=Admin.class)
+	@JoinColumn(name=SpringConstants.ISSUE_ADMIN_ID, nullable=false)
+	private Admin issueAdmin;
 	
 	public Issue(IssueType issueType, String description, String status) {
 		super();

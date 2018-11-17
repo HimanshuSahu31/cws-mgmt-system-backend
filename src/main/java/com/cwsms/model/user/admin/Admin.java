@@ -1,50 +1,48 @@
 package com.cwsms.model.user.admin;
 
 import com.cwsms.constants.SpringConstants;
-import com.cwsms.model.office.type.OfficeType;
-import com.cwsms.model.user.Rights;
 import com.cwsms.model.user.User;
 import com.cwsms.model.issue.Issue;
 
 import javax.persistence.*;
-import java.util.List;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = SpringConstants.TABLE_ADMIN)
-public class Admin extends User {
-	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator= SpringConstants.GENERATOR_ADMIN)
-	@SequenceGenerator(name=SpringConstants.GENERATOR_ADMIN, sequenceName=SpringConstants.SEQUENCE_ADMIN)
-	private Long id;
+public class Admin extends User implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -457170900709667129L;
 
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity= Rights.class)
-	@JoinColumn(name=SpringConstants.ADMIN_RIGHTS, nullable=false)
-	private Rights rights;
+//	@Id
+//	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator= SpringConstants.GENERATOR_ADMIN)
+//	@SequenceGenerator(name=SpringConstants.GENERATOR_ADMIN, sequenceName=SpringConstants.SEQUENCE_ADMIN)
+//	@Column(name=SpringConstants.ADMIN_ID)
+//	private Long id;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, targetEntity = Issue.class)
-	@JoinColumn(name=SpringConstants.ADMIN_ISSUES, nullable=false)
-	private List<Issue> issuesAssigned;
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, targetEntity = Issue.class, mappedBy=SpringConstants.ADMIN_FK_ISSUES)
+	private Set<Issue> issuesAssigned = new HashSet<>();
 
-	public Admin(Rights rights, List<Issue> issuesAssigned) {
+	public Admin(Set<Issue> issuesAssigned) {
 		super();
-		this.rights = rights;
 		this.issuesAssigned = issuesAssigned;
 	}
 	public Admin() {
 		super();
 	}
-	public Rights getRights() {
-		return rights;
-	}
-	public void setRights(Rights rights) {
-		this.rights = rights;
-	}
-	public List<Issue> getIssuesAssigned() {
+	
+	public Set<Issue> getIssuesAssigned() {
 		return issuesAssigned;
 	}
-	public void setIssuesAssigned(List<Issue> issuesAssigned) {
+	public void setIssuesAssigned(Set<Issue> issuesAssigned) {
 		this.issuesAssigned = issuesAssigned;
 	}
+	
 	
 	
 }
