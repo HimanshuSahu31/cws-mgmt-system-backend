@@ -5,7 +5,9 @@ public class SpringConstants {
 		super();
 	}
 	
-	public static final String SCAN_BASE_PACKAGE = "com.cwsms.constants.rest";
+	public static final String SCAN_PACKAGE_ENTITY = "com.cwsms.model";
+	public static final String SCAN_PACKAGE_CONTROLLER = "com.cwsms.controller";
+	public static final String COLUMN_BIG_SERIAL = "bigserial";
 	
 	// Table Workspace
 	public static final String TABLE_WORKSPACE = "tb_workspace";
@@ -105,8 +107,7 @@ public class SpringConstants {
 
 	// Table Address
 	public static final String TABLE_ADDRESS = "tb_address";
-	public static final String GENERATOR_ADDRESS = "adsress_sequence";
-	public static final String SEQUENCE_ADDRESS = "ADDRESS_SEQ";
+	public static final String SEQUENCE_ADDRESS = "address_seq";
 	public static final String ADDRESS_LINE_ONE = "address_line_one";
 	public static final String ADDRESS_LINE_TWO= "address_line_two";
 	public static final String ADDRESS_LINE_THREE = "address_line_three";

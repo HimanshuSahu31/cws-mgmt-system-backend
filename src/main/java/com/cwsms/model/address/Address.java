@@ -10,18 +10,18 @@ import javax.persistence.*;
 @Table(name = SpringConstants.TABLE_ADDRESS)
 public class Address {
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator= SpringConstants.GENERATOR_ADDRESS)
-	@SequenceGenerator(name=SpringConstants.GENERATOR_ADDRESS, sequenceName=SpringConstants.SEQUENCE_ADDRESS)
-	@Column(name=SpringConstants.ADDRESS_ID)
+	@SequenceGenerator(name=SpringConstants.SEQUENCE_ADDRESS, sequenceName=SpringConstants.SEQUENCE_ADDRESS, allocationSize=1)
+	@GeneratedValue(strategy= GenerationType.IDENTITY, generator= SpringConstants.SEQUENCE_ADDRESS)
+	@Column(name=SpringConstants.ADDRESS_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
 	private Long id;
 
 	@Column(name=SpringConstants.ADDRESS_LINE_ONE, length=300, nullable=false)
 	private String addressLineOne;
 
-	@Column(name=SpringConstants.ADDRESS_LINE_TWO, length=300, nullable=false)
+	@Column(name=SpringConstants.ADDRESS_LINE_TWO, length=300, nullable=true)
 	private String addressLineTwo;
 
-	@Column(name=SpringConstants.ADDRESS_LINE_THREE, length=300, nullable=false)
+	@Column(name=SpringConstants.ADDRESS_LINE_THREE, length=300, nullable=true)
 	private String addressLineThree;
 
 	@Column(name=SpringConstants.ADDRESS_PINCODE, length=10, nullable=false)
