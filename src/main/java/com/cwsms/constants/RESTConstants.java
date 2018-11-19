@@ -20,6 +20,7 @@ public class RESTConstants {
 	public static final String ISSUES = "/issues";
 	public static final String ISSUES_ID = "/issues/{id}";
 	public static final String ISSUES_LINK = "all-users";
+	public static final String ISSUES_TYPE = "/issues/type/{id}";
 
 	// Issue Type Controller
 	public static final String ISSUE_TYPES = "/issuetype";

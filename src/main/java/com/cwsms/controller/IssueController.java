@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.MediaType;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.cwsms.constants.RESTConstants;
 import com.cwsms.exception.IssueNotFoundException;
 import com.cwsms.model.issue.Issue;
+import com.cwsms.model.issue.type.IssueType;
 import com.cwsms.repository.IssueRepository;
 
 @RestController
@@ -41,6 +43,16 @@ public class IssueController {
 		ControllerLinkBuilder linkTo = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(this.getClass()).getAllIssues());
 		resource.add(linkTo.withRel(RESTConstants.ISSUES_LINK));
 		return resource;
+	}
+	
+	@GetMapping(RESTConstants.ISSUES_TYPE)
+	public List<Issue> getByIssueType_Issue_Id(@PathVariable Long id) {
+		Issue issue = new Issue();
+		IssueType issueType = new IssueType();
+		issueType.setId(id);
+		issue.setIssueType(issueType);
+		Example<Issue> exampleIssue = Example.of(issue);
+		return issueRepository.findAll(exampleIssue);
 	}
 	
 	@DeleteMapping(RESTConstants.ISSUES_ID)
