@@ -29,9 +29,9 @@ import com.cwsms.model.workspace.Workspace;
 public class Office {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_OFFICE)
-	@SequenceGenerator(name=SpringConstants.GENERATOR_OFFICE, sequenceName=SpringConstants.SEQUENCE_OFFICE)
-	@Column(name=SpringConstants.OFFICE_ID)
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator=SpringConstants.SEQUENCE_OFFICE)
+	@SequenceGenerator(name=SpringConstants.SEQUENCE_OFFICE, sequenceName=SpringConstants.SEQUENCE_OFFICE)
+	@Column(name=SpringConstants.OFFICE_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
 	private Long id;
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity=OfficeType.class)

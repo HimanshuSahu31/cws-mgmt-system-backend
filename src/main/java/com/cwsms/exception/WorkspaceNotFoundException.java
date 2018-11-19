@@ -1,13 +1,13 @@
 package com.cwsms.exception;
 
-public class WorkspaceDoesNotExistException extends Exception {
+public class WorkspaceNotFoundException extends Exception {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4444605164502608466L;
 	
-	public WorkspaceDoesNotExistException(String errorMessage) {
+	public WorkspaceNotFoundException(String errorMessage) {
 		super(errorMessage);
 	}
 }

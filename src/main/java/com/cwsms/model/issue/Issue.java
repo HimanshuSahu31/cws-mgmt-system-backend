@@ -22,9 +22,9 @@ import com.cwsms.model.user.admin.Admin;
 public class Issue {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_ISSUE)
-	@SequenceGenerator(name=SpringConstants.GENERATOR_ISSUE, sequenceName=SpringConstants.SEQUENCE_ISSUE)
-	@Column(name=SpringConstants.ISSUE_ID)
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator=SpringConstants.SEQUENCE_ISSUE)
+	@SequenceGenerator(name=SpringConstants.SEQUENCE_ISSUE, sequenceName=SpringConstants.SEQUENCE_ISSUE)
+	@Column(name=SpringConstants.ISSUE_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
 	private Long id;
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity=IssueType.class)

@@ -36,9 +36,9 @@ public class Customer extends User implements Serializable{
 	 */
 	private static final long serialVersionUID = 2262403509003702327L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_CUSTOMER)
-	@SequenceGenerator(name=SpringConstants.GENERATOR_CUSTOMER, sequenceName=SpringConstants.SEQUENCE_CUSTOMER)
-	@Column(name=SpringConstants.CUSTOMER_ID)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.SEQUENCE_CUSTOMER)
+	@SequenceGenerator(name=SpringConstants.SEQUENCE_CUSTOMER, sequenceName=SpringConstants.SEQUENCE_CUSTOMER)
+	@Column(name=SpringConstants.CUSTOMER_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
 	private Long id;
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.BOOKING_FK_CUSTOMER)

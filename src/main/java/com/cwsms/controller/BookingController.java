@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.cwsms.constants.RESTConstants;
-import com.cwsms.exception.BookingDoesNotExistException;
+import com.cwsms.exception.BookingNotFoundException;
 import com.cwsms.model.booking.Booking;
 import com.cwsms.repository.BookingRepository;
 
@@ -30,13 +33,14 @@ public class BookingController {
 		return bookingRepository.findAll();
 	}
 	
-	@GetMapping(RESTConstants.BOOKINGS_ID)
-	public Booking getBooking(@PathVariable Long id) throws BookingDoesNotExistException{
+	@GetMapping(value=RESTConstants.BOOKINGS_ID, produces={MediaType.APPLICATION_JSON_VALUE,RESTConstants.MEDIA_TYPE_JSON_HAL})
+	public Resource<Booking> getBookingById(@PathVariable Long id) throws BookingNotFoundException {
 		Optional<Booking> booking = bookingRepository.findById(id);
-		if(!booking.isPresent()) {
-			throw new BookingDoesNotExistException("Booking ID: "+id);
-		}
-		return booking.get();
+		if(!booking.isPresent()) throw new BookingNotFoundException("Booking ID: "+id);
+		Resource<Booking> resource = new Resource<Booking>(booking.get());
+		ControllerLinkBuilder linkTo = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(this.getClass()).getAllBookings());
+		resource.add(linkTo.withRel(RESTConstants.BOOKINGS_LINK));
+		return resource;
 	}
 	
 	@DeleteMapping(RESTConstants.BOOKINGS_ID)

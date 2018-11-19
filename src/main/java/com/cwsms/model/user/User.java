@@ -23,10 +23,16 @@ public abstract class User implements Serializable{
 	private static final long serialVersionUID = -1902095698133115692L;
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator= SpringConstants.GENERATOR_USER)
-	@SequenceGenerator(name=SpringConstants.GENERATOR_USER, sequenceName=SpringConstants.SEQUENCE_USER)
-	@Column(name=SpringConstants.USER_ID)
+	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator= SpringConstants.SEQUENCE_USER)
+	@SequenceGenerator(name=SpringConstants.SEQUENCE_USER, sequenceName=SpringConstants.SEQUENCE_USER)
+	@Column(name=SpringConstants.USER_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
 	private Long id;
+	
+	@Column(name=SpringConstants.USER_USERNAME, length=30, nullable=false, updatable=false, unique=true)
+	private String username;
+	
+	@Column(name=SpringConstants.USER_PASSWORD, length=255, nullable=false, updatable=true)
+	private char[] password;
 
 	@Column(name=SpringConstants.USER_FIRST_NAME, length=20, nullable=false)
 	private String firstName;
@@ -145,6 +151,38 @@ public abstract class User implements Serializable{
 
 	public void setRights(Set<Rights> rights) {
 		this.userRights = rights;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public char[] getPassword() {
+		return password;
+	}
+
+	public void setPassword(char[] password) {
+		this.password = password;
+	}
+
+	public Address getUserAddress() {
+		return userAddress;
+	}
+
+	public void setUserAddress(Address userAddress) {
+		this.userAddress = userAddress;
+	}
+
+	public Set<Rights> getUserRights() {
+		return userRights;
+	}
+
+	public void setUserRights(Set<Rights> userRights) {
+		this.userRights = userRights;
 	}
 	
 	

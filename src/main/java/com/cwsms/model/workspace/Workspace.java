@@ -30,9 +30,9 @@ import com.cwsms.model.user.customer.Customer;
 public class Workspace {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_WORKSPACE)
-	@SequenceGenerator(name=SpringConstants.GENERATOR_WORKSPACE, sequenceName=SpringConstants.SEQUENCE_WORKSPACE)
-	@Column(name=SpringConstants.WORKSPACE_ID)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.SEQUENCE_WORKSPACE)
+	@SequenceGenerator(name=SpringConstants.SEQUENCE_WORKSPACE, sequenceName=SpringConstants.SEQUENCE_WORKSPACE)
+	@Column(name=SpringConstants.WORKSPACE_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
 	private Long id;
 	
 	@ManyToMany(fetch=FetchType.LAZY, cascade= {CascadeType.PERSIST, CascadeType.MERGE})

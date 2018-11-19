@@ -31,9 +31,9 @@ import com.cwsms.model.workspace.Workspace;
 public class Booking {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_BOOKING)
-	@SequenceGenerator(name=SpringConstants.GENERATOR_BOOKING, sequenceName=SpringConstants.SEQUENCE_BOOKING)
-	@Column(name=SpringConstants.BOOKING_ID)
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator=SpringConstants.SEQUENCE_BOOKING)
+	@SequenceGenerator(name=SpringConstants.SEQUENCE_BOOKING, sequenceName=SpringConstants.SEQUENCE_BOOKING)
+	@Column(name=SpringConstants.BOOKING_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
 	private Long id;
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, targetEntity=Customer.class)

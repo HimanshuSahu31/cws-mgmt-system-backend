@@ -19,9 +19,9 @@ import com.cwsms.model.issue.Issue;
 public class IssueType {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_ISSUE_TYPE)
-	@SequenceGenerator(name=SpringConstants.GENERATOR_ISSUE_TYPE, sequenceName=SpringConstants.SEQUENCE_ISSUE_TYPE)
-	@Column(name=SpringConstants.ISSUE_TYPE_ID)
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator=SpringConstants.SEQUENCE_ISSUE_TYPE)
+	@SequenceGenerator(name=SpringConstants.SEQUENCE_ISSUE_TYPE, sequenceName=SpringConstants.SEQUENCE_ISSUE_TYPE)
+	@Column(name=SpringConstants.ISSUE_TYPE_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
 	private Long id;
 	
 	@Column(name=SpringConstants.ISSUE_TYPE_NAME, length=30, nullable=false)

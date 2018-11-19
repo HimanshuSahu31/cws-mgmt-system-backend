@@ -28,9 +28,9 @@ import com.cwsms.model.office.Office;
 public abstract class OfficeType {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_OFFICE_TYPE)
-	@SequenceGenerator(name=SpringConstants.GENERATOR_OFFICE_TYPE, sequenceName=SpringConstants.SEQUENCE_OFFICE_TYPE)
-	@Column(name=SpringConstants.OFFICETYPE_ID)
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator=SpringConstants.SEQUENCE_OFFICE_TYPE)
+	@SequenceGenerator(name=SpringConstants.SEQUENCE_OFFICE_TYPE, sequenceName=SpringConstants.SEQUENCE_OFFICE_TYPE)
+	@Column(name=SpringConstants.OFFICETYPE_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
 	protected Long id;
 	
 	@Column(name=SpringConstants.OFFICETYPE_DESCRIPTION, length=300, nullable=false)

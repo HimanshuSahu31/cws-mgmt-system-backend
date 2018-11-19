@@ -21,8 +21,9 @@ import com.cwsms.model.user.customer.Customer;
 public class Payment {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_PAYMENT)
-	@SequenceGenerator(name=SpringConstants.GENERATOR_PAYMENT, sequenceName=SpringConstants.SEQUENCE_PAYMENT)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.SEQUENCE_PAYMENT)
+	@SequenceGenerator(name=SpringConstants.SEQUENCE_PAYMENT, sequenceName=SpringConstants.SEQUENCE_PAYMENT)
+	@Column(name=SpringConstants.PAYMENT_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
 	private Long id;
 	
 	@Column(name=SpringConstants.PAYMENT_DETAILS, length=255, nullable=false)

@@ -18,9 +18,9 @@ public class Rights implements Serializable {
 	private static final long serialVersionUID = -6216907676570262704L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.GENERATOR_RIGHTS)
-	@SequenceGenerator(name=SpringConstants.GENERATOR_RIGHTS, sequenceName=SpringConstants.SEQUENCE_RIGHTS)
-	@Column(name=SpringConstants.RIGHTS_ID)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator=SpringConstants.SEQUENCE_RIGHTS)
+	@SequenceGenerator(name=SpringConstants.SEQUENCE_RIGHTS, sequenceName=SpringConstants.SEQUENCE_RIGHTS)
+	@Column(name=SpringConstants.RIGHTS_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
 	private Long id;
 
 	@Column(name=SpringConstants.RIGHTS_CAN_READ, nullable=false)

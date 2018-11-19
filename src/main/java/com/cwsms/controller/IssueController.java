@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.cwsms.constants.RESTConstants;
-import com.cwsms.exception.IssueDoesNotExistException;
+import com.cwsms.exception.IssueNotFoundException;
 import com.cwsms.model.issue.Issue;
 import com.cwsms.repository.IssueRepository;
 
@@ -30,15 +33,14 @@ public class IssueController {
 		return issueRepository.findAll();
 	}
 	
-	@GetMapping(RESTConstants.ISSUES_ID)
-	public Issue getIssueById(@PathVariable Long id) throws IssueDoesNotExistException{
+	@GetMapping(value=RESTConstants.ISSUES_ID, produces={MediaType.APPLICATION_JSON_VALUE,RESTConstants.MEDIA_TYPE_JSON_HAL})
+	public Resource<Issue> getIssueById(@PathVariable Long id) throws IssueNotFoundException {
 		Optional<Issue> issue = issueRepository.findById(id);
-		
-		if(!issue.isPresent()) {
-			throw new IssueDoesNotExistException("Issue ID: "+id);
-		}
-		
-		return issue.get();
+		if(!issue.isPresent()) throw new IssueNotFoundException("Issue ID: "+id);
+		Resource<Issue> resource = new Resource<Issue>(issue.get());
+		ControllerLinkBuilder linkTo = ControllerLinkBuilder.linkTo(ControllerLinkBuilder.methodOn(this.getClass()).getAllIssues());
+		resource.add(linkTo.withRel(RESTConstants.ISSUES_LINK));
+		return resource;
 	}
 	
 	@DeleteMapping(RESTConstants.ISSUES_ID)
