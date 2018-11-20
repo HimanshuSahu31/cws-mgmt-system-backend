@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
+@DiscriminatorValue(value=SpringConstants.RECEPTIONIST_DISCRIMINATOR_VALUE)
 @Table(name = SpringConstants.TABLE_RECEPTIONIST)
 public class Receptionist extends User implements Serializable {
 	

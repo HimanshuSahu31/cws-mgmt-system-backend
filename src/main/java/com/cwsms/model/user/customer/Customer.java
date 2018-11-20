@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,7 +28,8 @@ import com.cwsms.constants.SpringConstants;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-@DiscriminatorValue(value=SpringConstants.CUSTOMER_DISCRIMINATOR)
+@DiscriminatorColumn(name=SpringConstants.CUSTOMER_DISCRIMINATOR)
+@DiscriminatorValue(value=SpringConstants.CUSTOMER_DISCRIMINATOR_VALUE)
 @Table(name=SpringConstants.TABLE_CUSTOMER)
 public class Customer extends User implements Serializable{
 	

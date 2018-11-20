@@ -4,11 +4,18 @@ import com.cwsms.constants.SpringConstants;
 import com.cwsms.model.office.Office;
 import com.cwsms.model.user.User;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = SpringConstants.TABLE_ADDRESS)
-public class Address {
+public class Address implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 591204668284727338L;
+
 	@Id
 	@SequenceGenerator(name=SpringConstants.SEQUENCE_ADDRESS, sequenceName=SpringConstants.SEQUENCE_ADDRESS, allocationSize=1)
 	@GeneratedValue(strategy= GenerationType.IDENTITY, generator= SpringConstants.SEQUENCE_ADDRESS)
@@ -39,15 +46,16 @@ public class Address {
 	@Column(name=SpringConstants.ADDRESS_COUNTRY, length=50, nullable=false)
 	private String country;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.OFFICE_FK_ADDRESS)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.OFFICE_FK_ADDRESS)
 	private Office office;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.USER_FK_ADDRESS)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.USER_FK_ADDRESS)
 	private User user;
 	
-	public Address(String addressLineOne, String addressLineTwo, String addressLineThree, String pincode, String area,
-			String city, String state, String country) {
+	public Address(Long id, String addressLineOne, String addressLineTwo, String addressLineThree, String pincode,
+			String area, String city, String state, String country, Office office, User user) {
 		super();
+		this.id = id;
 		this.addressLineOne = addressLineOne;
 		this.addressLineTwo = addressLineTwo;
 		this.addressLineThree = addressLineThree;
@@ -56,8 +64,13 @@ public class Address {
 		this.city = city;
 		this.state = state;
 		this.country = country;
+		this.office = office;
+		this.user = user;
 	}
-	
+	public Address(Integer id) {
+		super();
+		this.id = new Long(id);
+	}
 	public Address() {
 		super();
 	}
@@ -117,22 +130,5 @@ public class Address {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Office getOffice() {
-		return office;
-	}
-
-	public void setOffice(Office office) {
-		this.office = office;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 
 }

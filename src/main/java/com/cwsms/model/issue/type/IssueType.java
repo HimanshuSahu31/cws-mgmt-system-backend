@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import com.cwsms.constants.SpringConstants;
 import com.cwsms.model.issue.Issue;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name=SpringConstants.TABLE_ISSUE_TYPE)
@@ -24,19 +25,23 @@ public class IssueType {
 	@Column(name=SpringConstants.ISSUE_TYPE_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
 	private Long id;
 	
-	@Column(name=SpringConstants.ISSUE_TYPE_NAME, length=30, nullable=false)
+	@Column(name=SpringConstants.ISSUE_TYPE_NAME, length=30, nullable=true)
 	private String issueTypeName;
 	
-	@Column(name=SpringConstants.ISSUE_TYPE_PRIORITY, length=30, nullable=false)
+	@Column(name=SpringConstants.ISSUE_TYPE_PRIORITY, length=30, nullable=true)
 	private String issueTypePriority;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.ISSUE_FK)
+	@JsonIgnore
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE, mappedBy=SpringConstants.ISSUE_FK)
 	private Issue issue;
 	
 	public IssueType(String issueTypeName, String issueTypePriority) {
 		super();
 		this.issueTypeName = issueTypeName;
 		this.issueTypePriority = issueTypePriority;
+	}
+	public IssueType(Integer id) {
+		this.id = new Long(id);
 	}
 	public IssueType() {
 		super();
@@ -59,4 +64,5 @@ public class IssueType {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 }

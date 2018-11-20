@@ -36,4 +36,9 @@ public class RESTConstants {
 	public static final String USERS = "/users";
 	public static final String USERS_ID = "/users/{id}";
 	public static final String USERS_LINK = "all-users";
+	
+	// Admin Controller
+	public static final String ADMIN = "/admin";
+	public static final String ADMIN_ID = "/admin/{id}";
+	public static final String ADMIN_LINK = "all-admin";
 }

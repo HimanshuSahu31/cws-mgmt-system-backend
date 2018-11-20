@@ -1,19 +1,34 @@
 package com.cwsms.model.user;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.InheritanceType;
+
 import com.cwsms.constants.SpringConstants;
 import com.cwsms.model.address.Address;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name=SpringConstants.USER_DISCRIMINATOR)
+@DiscriminatorValue(value=SpringConstants.USER_DISCRIMINATOR_VALUE)
 @Table(name = SpringConstants.TABLE_USER)
 public abstract class User implements Serializable{
 	
@@ -25,58 +40,63 @@ public abstract class User implements Serializable{
 	@Id
 	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator= SpringConstants.SEQUENCE_USER)
 	@SequenceGenerator(name=SpringConstants.SEQUENCE_USER, sequenceName=SpringConstants.SEQUENCE_USER)
-	@Column(name=SpringConstants.USER_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
-	private Long id;
+	@Column(name=SpringConstants.USER_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL, unique=true)
+	protected Long id;
 	
 	@Column(name=SpringConstants.USER_USERNAME, length=30, nullable=false, updatable=false, unique=true)
-	private String username;
+	protected String username;
 	
 	@Column(name=SpringConstants.USER_PASSWORD, length=255, nullable=false, updatable=true)
-	private char[] password;
+	protected char[] password;
 
 	@Column(name=SpringConstants.USER_FIRST_NAME, length=20, nullable=false)
-	private String firstName;
+	protected String firstName;
 
 	@Column(name=SpringConstants.USER_MIDDLE_NAME, length=20, nullable=false)
-	private String middleName;
+	protected String middleName;
 
 	@Column(name=SpringConstants.USER_LAST_NAME, length=20, nullable=false)
-	private String lastName;
+	protected String lastName;
 
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity=Address.class)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST, targetEntity=Address.class)
 	@JoinColumn(name=SpringConstants.USER_ADDRESS, nullable=false)
-	private Address userAddress;
+	protected Address userAddress;
 
 	@Column(name=SpringConstants.USER_DATE_OF_BIRTH, length=20, nullable=false)
-	@DateTimeFormat(pattern=SpringConstants.USER_DATE_FORMAT)
-	private Date dateOfBirth;
+	//@DateTimeFormat(pattern=SpringConstants.USER_DATE_FORMAT)
+	protected String dateOfBirth;
 
 	@Column(name=SpringConstants.USER_EMAIL, length=300, nullable=false)
-	private String email;
+	protected String email;
 
 	@Column(name=SpringConstants.USER_PHONE_NUMBER, length=15, nullable=false)
-	private String phoneNumber;
+	protected String phoneNumber;
 
 	@Column(name=SpringConstants.USER_ID_PROOF, length=50, nullable=false)
-	private String idProof;
+	protected String idProof;
 	
-	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.LAZY)
+	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.EAGER)
 	@JoinTable(name=SpringConstants.TB_USER_RIGHTS, joinColumns={@JoinColumn(name=SpringConstants.USER_ID)}, inverseJoinColumns={@JoinColumn(name=SpringConstants.RIGHTS_ID)})
-	private Set<Rights> userRights = new HashSet<>();
+	protected Set<Rights> userRights = new HashSet<>();
 
 	@Column(name=SpringConstants.USER_STATUS, nullable=false)
-	private Boolean status;
+	protected Boolean status;
 
-	public User(String firstName, String middleName, String lastName, Address address, Date dateOfBirth, String email, String phoneNumber, String idProof, Boolean status) {
+	public User(Long id, String username, char[] password, String firstName, String middleName, String lastName,
+			String dateOfBirth, String email, String phoneNumber, String idProof,
+			Set<Rights> userRights, Boolean status) {
 		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
-		this.userAddress = address;
 		this.dateOfBirth = dateOfBirth;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.idProof = idProof;
+		this.userRights = userRights;
 		this.status = status;
 	}
 
@@ -100,16 +120,10 @@ public abstract class User implements Serializable{
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public Address getAddress() {
-		return userAddress;
-	}
-	public void setAddress(Address address) {
-		this.userAddress = address;
-	}
-	public Date getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public String getEmail() {

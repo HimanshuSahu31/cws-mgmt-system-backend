@@ -115,6 +115,7 @@ public class SpringConstants {
 	public static final String TABLE_USER = "tb_user";
 	public static final String SEQUENCE_USER = "user_seq";
 	public static final String USER_DISCRIMINATOR = "user_type";
+	public static final String USER_DISCRIMINATOR_VALUE = "user";
 	public static final String USER_USERNAME = "user_username";
 	public static final String USER_PASSWORD = "user_password";
 	public static final String USER_FIRST_NAME = "user_fname";
@@ -151,23 +152,28 @@ public class SpringConstants {
 	public static final String ADMIN_ISSUES = "admin_issues";
 	public static final String ADMIN_ID = "admin_id";
 	public static final String ADMIN_FK_ISSUES = "issueAdmin";
+	public static final String ADMIN_DISCRIMINATOR_VALUE = "admin";
 
 	// Table Receptionist
 	public static final String TABLE_RECEPTIONIST = "tb_receptionist";
 	public static final String RECEPTIONIST_WORKSPACE_ASSIGNED = "receptionist_workspace";
 	public static final String RECEPTIONIST_ID = "receptionist_id";
+	public static final String RECEPTIONIST_DISCRIMINATOR_VALUE = "receptionist";
 	
 	// Table Company
 	public static final String TABLE_COMPANY = "tb_company";
 	public static final String COMPANY_ID = "company_id";
+	public static final String COMPANY_DISCRIMINATOR_VALUE = "company";
 	
 	// Table Single User
 	public static final String TABLE_SINGLE_USER = "tb_single_user";
 	public static final String SINGLE_USER_ID = "single_user_id";
+	public static final String SINGLE_USER_DISCRIMINATOR_VALUE = "single_user";
 	
 	// Table Customer
 	public static final String TABLE_CUSTOMER = "tb_customer";
 	public static final String CUSTOMER_DISCRIMINATOR = "customer_type";
+	public static final String CUSTOMER_DISCRIMINATOR_VALUE = "customer";
 	public static final String SEQUENCE_CUSTOMER= "customer_seq";
 	public static final String CUSTOMER_ID = "customer_id";
 }

@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@DiscriminatorValue(value=SpringConstants.ADMIN_DISCRIMINATOR_VALUE)
 @Table(name = SpringConstants.TABLE_ADMIN)
 public class Admin extends User implements Serializable {
 	
@@ -29,14 +30,8 @@ public class Admin extends User implements Serializable {
 	public Admin() {
 		super();
 	}
-	
-	public Set<Issue> getIssuesAssigned() {
-		return issuesAssigned;
+	public Admin(Integer id) {
+		this.id = new Long(id);
 	}
-	public void setIssuesAssigned(Set<Issue> issuesAssigned) {
-		this.issuesAssigned = issuesAssigned;
-	}
-	
-	
 	
 }

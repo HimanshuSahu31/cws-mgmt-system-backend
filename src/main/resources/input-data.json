@@ -1,0 +1,41 @@
+// Issue
+{
+    "id":1,
+    "issueAdmin": 1,
+    "issueType": 1,
+    "description": "issue desc",
+    "status": "under progress"
+}
+
+// User
+{
+	"id":1,
+	"username":"user1",
+	"password":"123456",
+	"firstName":"susan",
+	"middleName":"biddle",
+	"lastName":"ross",
+	"userType":"admin",
+	"userAddress":1,
+	"dateOfBirth":"15/11/1986",
+	"email":"sross@yahoo.com",
+	"phoneNumber":"1234567890",
+	"idProof":"pan-card",
+	"status":true
+}
+
+// Admin
+{
+	"id":1,
+	"username":"user1",
+	"password":"123456",
+	"firstName":"susan",
+	"middleName":"biddle",
+	"lastName":"ross",
+	"userAddress":1,
+	"dateOfBirth":"1986-11-15 15:11:11",
+	"email":"sross@yahoo.com",
+	"phoneNumber":"1234567890",
+	"idProof":"pan-card",
+	"status":true
+}

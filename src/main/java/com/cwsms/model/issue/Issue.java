@@ -27,8 +27,8 @@ public class Issue {
 	@Column(name=SpringConstants.ISSUE_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
 	private Long id;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity=IssueType.class)
-	@JoinColumn(name=SpringConstants.ISSUE_TYPE_ID, nullable=false)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.MERGE, targetEntity=IssueType.class)
+	@JoinColumn(name=SpringConstants.ISSUE_TYPE_ID, nullable=false, updatable=false)
 	private IssueType issueType;
 	
 	@Column(name=SpringConstants.ISSUE_DESCRIPTION, length=100, nullable=false)
@@ -37,7 +37,7 @@ public class Issue {
 	@Column(name=SpringConstants.ISSUE_STATUS, length=15, nullable=false)
 	private String status;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, targetEntity=Admin.class)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST, targetEntity=Admin.class)
 	@JoinColumn(name=SpringConstants.ISSUE_ADMIN_ID, nullable=false)
 	private Admin issueAdmin;
 	
@@ -73,6 +73,12 @@ public class Issue {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public Admin getIssueAdmin() {
+		return issueAdmin;
+	}
+	public void setIssueAdmin(Admin issueAdmin) {
+		this.issueAdmin = issueAdmin;
 	}
 	
 	
