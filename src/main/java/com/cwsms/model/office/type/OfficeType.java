@@ -46,7 +46,7 @@ public abstract class OfficeType {
 	@DecimalMax(value=SpringConstants.OFFICETYPE_PRICE_MAX)
 	protected Float officeTypePrice;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.OFFICE_FK_TYPE)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.OFFICE_FK_TYPE)
 	protected Office office;
 	
 	public String getOfficeTypeDescription() {
@@ -66,6 +66,12 @@ public abstract class OfficeType {
 	}
 	public void setOfficeTypePrice(Float officeTypePrice) {
 		this.officeTypePrice = officeTypePrice;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }

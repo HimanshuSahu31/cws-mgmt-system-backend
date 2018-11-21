@@ -111,5 +111,14 @@ public class Workspace {
 		this.capacity = capacity;
 		this.customers = customers;
 	}
-	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Workspace(Integer id) {
+		super();
+		this.id = new Long(id);
+	}
 }

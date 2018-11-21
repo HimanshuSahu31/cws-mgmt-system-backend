@@ -31,7 +31,6 @@ public class AdminController {
 	
 	@GetMapping(RESTConstants.ADMIN)
 	public List<Admin> getAllAdmin() {
-		System.out.println("dekh:"+adminRepository.findAll().size());
 		return adminRepository.findAll();
 	}
 	

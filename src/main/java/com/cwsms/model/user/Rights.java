@@ -110,4 +110,8 @@ public class Rights implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public Rights(Integer id) {
+		super();
+		this.id = new Long(id);
+	}
 }

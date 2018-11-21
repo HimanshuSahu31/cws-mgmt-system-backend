@@ -88,11 +88,8 @@ public class Booking {
 	public void setOffice(Office office) {
 		this.office = office;
 	}
-	public Set<Payment> getPayment() {
-		return payment;
+	public Booking(Integer id) {
+		super();
+		this.id = new Long(id);
 	}
-	public void setPayment(Set<Payment> payment) {
-		this.payment = payment;
-	}
-	
 }

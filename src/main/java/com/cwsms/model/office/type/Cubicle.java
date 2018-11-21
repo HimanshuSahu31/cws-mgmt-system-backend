@@ -20,4 +20,9 @@ public class Cubicle extends OfficeType {
 		this.officeTypeCapacity = officeTypeCapacity;
 		this.officeTypePrice = officeTypePrice;
 	}
+	
+	public Cubicle(Integer id) {
+		super();
+		this.id = new Long(id);
+	}
 }

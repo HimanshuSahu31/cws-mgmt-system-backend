@@ -199,5 +199,8 @@ public abstract class User implements Serializable{
 		this.userRights = userRights;
 	}
 	
-	
+	public User(Integer id) {
+		super();
+		this.id = new Long(id);
+	}
 }

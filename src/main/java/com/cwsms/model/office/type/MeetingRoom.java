@@ -19,4 +19,9 @@ public class MeetingRoom extends OfficeType {
 		this.officeTypeCapacity = officeTypeCapacity;
 		this.officeTypePrice = officeTypePrice;
 	}
+	
+	public MeetingRoom(Integer id) {
+		super();
+		this.id = new Long(id);
+	}
 }

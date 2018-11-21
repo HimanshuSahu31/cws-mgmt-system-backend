@@ -4,14 +4,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class WorkspaceNotFoundException extends Exception {
+public class PaymentNotFoundException extends RuntimeException {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4444605164502608466L;
+	private static final long serialVersionUID = -5297446518206534548L;
 	
-	public WorkspaceNotFoundException(String errorMessage) {
+	public PaymentNotFoundException(String errorMessage) {
 		super(errorMessage);
 	}
 }

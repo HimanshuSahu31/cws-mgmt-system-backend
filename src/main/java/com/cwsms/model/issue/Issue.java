@@ -80,6 +80,9 @@ public class Issue {
 	public void setIssueAdmin(Admin issueAdmin) {
 		this.issueAdmin = issueAdmin;
 	}
-	
+	public Issue(Integer id) {
+		super();
+		this.id = new Long(id);
+	}
 	
 }

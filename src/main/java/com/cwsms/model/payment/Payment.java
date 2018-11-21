@@ -71,4 +71,14 @@ public class Payment {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public Booking getBooking() {
+		return booking;
+	}
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
+	public Payment(Integer id) {
+		super();
+		this.id = new Long(id);
+	}
 }

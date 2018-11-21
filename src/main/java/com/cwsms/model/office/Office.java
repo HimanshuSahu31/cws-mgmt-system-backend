@@ -34,14 +34,14 @@ public class Office {
 	@Column(name=SpringConstants.OFFICE_ID, updatable=false, columnDefinition=SpringConstants.COLUMN_BIG_SERIAL)
 	private Long id;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity=OfficeType.class)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, targetEntity=OfficeType.class)
 	@JoinColumn(name=SpringConstants.OFFICE_TYPE, nullable=false)
 	private OfficeType officeType;
 	
 	@Column(name=SpringConstants.OFFICE_DESCRIPTION, length=300, nullable=false)
 	private String officeDescription;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL, targetEntity=Address.class)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, targetEntity=Address.class)
 	@JoinColumn(name=SpringConstants.OFFICE_ADDRESS, nullable=false)
 	private Address officeAddress;
 	
@@ -50,10 +50,10 @@ public class Office {
 	@Max(value=5)
 	private Integer officeRating;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.OFFICE_FK_BOOKING)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.OFFICE_FK_BOOKING)
 	private Booking booking;
 	
-	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.WORKSPACE_FK_OFFICES)
+	@ManyToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST, mappedBy=SpringConstants.WORKSPACE_FK_OFFICES)
 	private Set<Workspace> workspace = new HashSet<Workspace>();
 	
 	public String getOfficeDescription() {
@@ -95,5 +95,17 @@ public class Office {
 
 	public Office() {
 		super();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Office(Integer id) {
+		super();
+		this.id = new Long(id);
 	}
 }

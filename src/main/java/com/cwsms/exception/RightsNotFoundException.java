@@ -4,14 +4,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class WorkspaceNotFoundException extends Exception {
-
+public class RightsNotFoundException extends RuntimeException {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4444605164502608466L;
-	
-	public WorkspaceNotFoundException(String errorMessage) {
+	private static final long serialVersionUID = -1598943069089013457L;
+
+	public RightsNotFoundException(String errorMessage) {
 		super(errorMessage);
 	}
 }
