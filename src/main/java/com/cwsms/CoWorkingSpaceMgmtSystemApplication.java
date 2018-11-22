@@ -9,9 +9,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.cwsms.constants.SpringConstants;
 
-@ComponentScan(basePackages=SpringConstants.SCAN_PACKAGE_CONTROLLER)
+//@ComponentScan(basePackages=SpringConstants.SCAN_PACKAGE_CONTROLLER)
 @EntityScan(basePackages=SpringConstants.SCAN_PACKAGE_ENTITY)
-@EnableAutoConfiguration(exclude= {ErrorMvcAutoConfiguration.class})
+//@EnableAutoConfiguration(exclude= {ErrorMvcAutoConfiguration.class})
 @SpringBootApplication
 public class CoWorkingSpaceMgmtSystemApplication {
 
